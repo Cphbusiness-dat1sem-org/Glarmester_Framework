@@ -1,37 +1,21 @@
 package glarmester.logic;
 
-import glarmester.presentation.GUI;
-import glarmester.presentation.UI;
-import glarmester.data.DataAccessor;
-import glarmester.data.DataAccessorFile;
-import glarmester.data.DataAccessorHardCodedValues;
+import java.util.List;
 
-/**
- *
- * @author RODA
- */
-public class Controller {
-    public static final boolean DEBUG = true;
-    private UI ui = new GUI();
-//    private DataAccessor data = new DataAccessorFile();
-    private DataAccessor data = new DataAccessorHardCodedValues();
-    private PriceCalculator logic = new PriceCalculator();
+public interface Controller {
     
-    public void go() {
-        // Get input
-        double height = ui.getFrameHeight();
-        //System.out.println("Height = " + height);
-        double width = ui.getFrameWidth();
-        //System.out.println("Width = " + width);
-        FrameType type = ui.getFrameType();
-        //System.out.println("Type = " + type.toString());
-        
-        // Calculate price
-        double price = logic.calculatePrice(height, width, type, data);
-        
-        // Display result
-        ui.displayPrice(price);
-        System.exit(0);
-    }
+    /**
+     * Retrieves a list of the names of the available frame. Not the Frame, just the name.
+     * @return A list of frame names.
+     */
+    public List<String> getFrameNames();
     
+    /**
+     * Retrieves the calculated total price of a window.
+     * @param height_cm The height of the window
+     * @param width_cm The width of the window
+     * @param frameName The name of a specific type of frame
+     * @return The price of the entire window (frame + glass)
+     */
+    public double getTotalPrice(int height_cm, int width_cm, String frameName);
 }
