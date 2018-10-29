@@ -29,6 +29,7 @@ public class DataAccessorHardCodedValues implements DataAccessor {
 
     @Override
     public Frame getFrame(String name) throws DataException {
+        if(name == null) throw new DataException("Name can't be null!");
         switch(name.toLowerCase()){
             case "plain": return frames.get(0);
             case "ornate": return frames.get(1);
